@@ -19,4 +19,4 @@ Este repositorio publica el **Formulario de Licencia y/o Permiso** embebido desd
 1. Deja `index.html` y `.nojekyll` en la **raíz** del repo.
 2. En `index.html`, reemplaza:
    ```js
-   const WEB_APP_URL = 'https://script.google.com/macros/s/PEGAR_AQUI_TU_DEPLOY_ID/exec';
+   const WEB_APP_URL = 'https://script.google.com/macros/library/d/1jQHiBMupmJCsEz--nGN5FpFrv7h8kO0jm8U5a88ipCYHAsDvVJJ-8VIp/30';
