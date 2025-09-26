@@ -81,7 +81,7 @@
 
 <script>
   // 1) Pega aquí tu URL de la Web App (despliegue de Apps Script):
-  const WEB_APP_URL = 'https://script.google.com/macros/s/PEGAR_AQUI_TU_DEPLOY_ID/exec'; // <-- ACTUALIZA ESTO
+  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxhqGrJChrWOVJq-qPAJD90paxnZuk6zqpiNH-oIC1NEvYbYEuBLWwOkkAT5cBGsGa7aQ/exec'; // <-- ACTUALIZA ESTO
 
   // Permitir que se pase por querystring ?app=URL si hace falta (útil para probar)
   const qp = new URLSearchParams(location.search);
