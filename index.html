@@ -2,109 +2,2470 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Formulario de Licencia y/o Permiso – INGAVI</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="color-scheme" content="light">
-  <meta name="description" content="Formulario de Licencia y/o Permiso – INGAVI (embebido)">
-  <link rel="icon" href="https://servicios.ips.gov.py/constancias_aop/images/logoIps2013_color.jpg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sistema de Licencias y Permisos - INGAVI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    :root{
-      --bg:#f7f9fc; --card:#fff; --text:#0f172a; --muted:#6b7280;
-      --ring:#e5e7eb; --brand:#0b5ed7;
+    :root {
+      --primary: #1a73e8;
+      --primary-light: #e8f0fe;
+      --primary-dark: #174ea6;
+      --secondary: #34a853;
+      --secondary-light: #e6f4ea;
+      --accent: #fbbc04;
+      --accent-light: #fef7e0;
+      --error: #ea4335;
+      --error-light: #fce8e6;
+      --text-primary: #202124;
+      --text-secondary: #5f6368;
+      --text-disabled: #9aa0a6;
+      --border: #dadce0;
+      --background: #f8f9fa;
+      --surface: #ffffff;
+      --shadow: 0 1px 2px 0 rgba(60,64,67,0.3), 0 1px 3px 1px rgba(60,64,67,0.15);
+      --shadow-elevated: 0 4px 8px 0 rgba(60,64,67,0.3), 0 8px 16px 4px rgba(60,64,67,0.15);
     }
-    html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-    .wrap{display:flex;flex-direction:column;min-height:100%}
-    header{background:#fff;border-bottom:1px solid var(--ring)}
-    .container{max-width:1080px;margin:0 auto;padding:10px 16px}
-    .hdr{display:flex;align-items:center;gap:12px;justify-content:space-between}
-    .hdr .logos{display:flex;align-items:center;gap:12px}
-    .hdr img{height:40px;object-fit:contain}
-    .title{text-align:center;flex:1}
-    .title .a{font-weight:800;letter-spacing:.02em}
-    .title .b{font-weight:700}
-    .bar{display:flex;gap:8px;justify-content:flex-end}
-    .btn{appearance:none;border:1px solid var(--ring);background:#fff;color:#111827;border-radius:10px;padding:8px 12px;cursor:pointer}
-    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-    main{flex:1}
-    .framebox{max-width:1200px;margin:10px auto;border:1px solid var(--ring);background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 6px 24px rgba(0,0,0,.06)}
-    iframe{width:100%;height:calc(100vh - 148px);border:0;background:#fff}
-    iframe#appFrame{ min-height: 80vh; } /* o 100vh si lo prefieres a pantalla completa */
-    .fallback{padding:16px;font-size:.95rem;color:var(--muted);display:none}
-    .spinner{display:flex;align-items:center;gap:10px;padding:14px;color:var(--muted);font-size:.95rem;border-bottom:1px dashed var(--ring)}
-    .dot{width:8px;height:8px;border-radius:999px;background:var(--brand);opacity:.3;animation:blink 1.2s infinite}
-    .dot:nth-child(2){animation-delay:.2s}.dot:nth-child(3){animation-delay:.4s}
-    @keyframes blink{50%{opacity:1}}
-    footer{border-top:1px solid var(--ring);background:#fff}
-    footer .container{font-size:.85rem;color:var(--muted)}
-    @media (max-width:640px){ .title .a{font-size:.95rem} .title .b{font-size:.95rem}}
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--background);
+      color: var(--text-primary);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    header {
+      background-color: var(--surface);
+      box-shadow: var(--shadow);
+      padding: 16px 0;
+      margin-bottom: 24px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 16px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo i {
+      font-size: 28px;
+      color: var(--primary);
+    }
+
+    .logo h1 {
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--primary-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary);
+      font-weight: 500;
+    }
+
+    .card {
+      background-color: var(--surface);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      margin-bottom: 24px;
+      overflow: hidden;
+    }
+
+    .card-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .card-title {
+      font-size: 18px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-title i {
+      color: var(--primary);
+    }
+
+    .card-body {
+      padding: 24px;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .form-col {
+      flex: 1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      font-size: 14px;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.2s;
+      background-color: var(--surface);
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(26, 115, 232, 0.1);
+    }
+
+    input:disabled, select:disabled, textarea:disabled {
+      background-color: var(--background);
+      color: var(--text-disabled);
+      cursor: not-allowed;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .btn-primary {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--primary-light);
+    }
+
+    .btn-success {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    .btn-success:hover {
+      background-color: #2e8b57;
+    }
+
+    .btn-danger {
+      background-color: var(--error);
+      color: white;
+    }
+
+    .btn-danger:hover {
+      background-color: #d33b2c;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .status-message {
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .status-success {
+      background-color: var(--secondary-light);
+      color: var(--secondary);
+    }
+
+    .status-error {
+      background-color: var(--error-light);
+      color: var(--error);
+    }
+
+    .status-warning {
+      background-color: var(--accent-light);
+      color: var(--accent);
+    }
+
+    .status-info {
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .tab {
+      padding: 12px 24px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--text-secondary);
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .file-upload {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .file-upload input[type=file] {
+      position: absolute;
+      left: -9999px;
+    }
+
+    .file-upload-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 24px;
+      border: 2px dashed var(--border);
+      border-radius: 4px;
+      background-color: var(--background);
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .file-upload-label:hover {
+      border-color: var(--primary);
+      background-color: var(--primary-light);
+      color: var(--primary);
+    }
+
+    .file-info {
+      margin-top: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .progress {
+      height: 4px;
+      background-color: var(--border);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: var(--primary);
+      width: 0;
+      transition: width 0.3s;
+    }
+
+    .tooltip {
+      position: relative;
+      display: inline-block;
+    }
+
+    .tooltip .tooltiptext {
+      visibility: hidden;
+      width: 200px;
+      background-color: var(--text-primary);
+      color: var(--surface);
+      text-align: center;
+      border-radius: 4px;
+      padding: 8px;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      font-size: 14px;
+    }
+
+    .tooltip:hover .tooltiptext {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .modal-content {
+      background-color: var(--surface);
+      margin: 10% auto;
+      padding: 24px;
+      border-radius: 8px;
+      width: 80%;
+      max-width: 800px;
+      box-shadow: var(--shadow-elevated);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    .close {
+      color: var(--text-secondary);
+      font-size: 24px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close:hover {
+      color: var(--text-primary);
+    }
+
+    .loading {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--border);
+      border-radius: 50%;
+      border-top-color: var(--primary);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 16px;
+      border-radius: 4px;
+      box-shadow: var(--shadow-elevated);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transform: translateX(120%);
+      transition: transform 0.3s ease-out;
+    }
+
+    .notification.show {
+      transform: translateX(0);
+    }
+
+    .notification-success {
+      background-color: var(--secondary);
+      color: white;
+    }
+
+    .notification-error {
+      background-color: var(--error);
+      color: white;
+    }
+
+    .notification-info {
+      background-color: var(--primary);
+      color: white;
+    }
+
+    .notification-warning {
+      background-color: var(--accent);
+      color: var(--text-primary);
+    }
+
+    @media (max-width: 768px) {
+      .form-row {
+        flex-direction: column;
+        gap: 0;
+      }
+      
+      .header-content {
+        flex-direction: column;
+        gap: 16px;
+      }
+      
+      .btn-group {
+        flex-direction: column;
+      }
+      
+      .modal-content {
+        width: 95%;
+        margin: 5% auto;
+      }
+    }
   </style>
 </head>
 <body>
-<div class="wrap">
   <header>
-
+    <div class="header-content">
+      <div class="logo">
+        <i class="fas fa-file-contract"></i>
+        <h1>Sistema de Licencias y Permisos</h1>
+      </div>
+      <div class="user-info">
+        <span id="userEmail">Cargando...</span>
+        <div class="avatar" id="userAvatar">U</div>
+      </div>
+    </div>
   </header>
 
-  <main>
-    <div class="container framebox">
-      <div class="spinner" id="spinner">
-        <div class="dot"></div><div class="dot"></div><div class="dot"></div>
-        <span>Cargando formulario…</span>
-        <div class="bar" style="margin-left:auto">
-          <button class="btn" id="openNewTab">Abrir en pestaña nueva</button>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" data-tab="solicitud">Nueva Solicitud</div>
+      <div class="tab" data-tab="historial">Historial</div>
+      <div class="tab" data-tab="reportes">Reportes</div>
+    </div>
+
+    <div id="solicitud" class="tab-content active">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fas fa-user-edit"></i>
+            Datos del Funcionario
+          </div>
+          <div class="tooltip">
+            <i class="fas fa-info-circle"></i>
+            <span class="tooltiptext">Ingrese su número de cédula para buscar sus datos</span>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-col">
+              <label for="cedula">Cédula</label>
+              <input type="text" id="cedula" placeholder="Ingrese su número de cédula">
+            </div>
+            <div class="form-col">
+              <label>&nbsp;</label>
+              <button class="btn btn-primary" id="buscarBtn">
+                <i class="fas fa-search"></i>
+                Buscar
+              </button>
+            </div>
+          </div>
+          <div id="datosFuncionario" class="hidden">
+            <div class="form-row">
+              <div class="form-col">
+                <label for="nombre">Nombre y Apellido</label>
+                <input type="text" id="nombre" readonly>
+              </div>
+              <div class="form-col">
+                <label for="sexo">Sexo</label>
+                <input type="text" id="sexo" readonly>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-col">
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+                <input type="text" id="fechaNacimiento" readonly>
+              </div>
+              <div class="form-col">
+                <label for="dependencia">Dependencia</label>
+                <input type="text" id="dependencia" readonly>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-col">
+                <label for="vinculacion">Vinculación</label>
+                <input type="text" id="vinculacion" readonly>
+              </div>
+              <div class="form-col">
+                <label for="contacto">Contacto</label>
+                <input type="text" id="contacto" readonly>
+              </div>
+            </div>
+          </div>
+          <div id="mensajeBusqueda"></div>
         </div>
       </div>
 
-      <iframe id="appFrame" title="Formulario PCC" referrerpolicy="no-referrer-when-downgrade" allow="clipboard-write *; clipboard-read *"></iframe>
-      <div class="fallback" id="fallback">
-        No se pudo embeber el formulario (el navegador o la red lo bloqueó).<br>
-        Haga clic en <b>Abrir en pestaña nueva</b>.
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fas fa-calendar-alt"></i>
+            Detalles de la Licencia
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-col">
+              <label for="expediente">Número de Expediente</label>
+              <input type="text" id="expediente" placeholder="Ingrese el número de expediente">
+            </div>
+            <div class="form-col">
+              <label for="motivo">Motivo de la Licencia</label>
+              <select id="motivo">
+                <option value="">Seleccione un motivo</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-col">
+              <label for="fechaDesde">Fecha Desde</label>
+              <input type="date" id="fechaDesde">
+            </div>
+            <div class="form-col">
+              <label for="fechaHasta">Fecha Hasta</label>
+              <input type="date" id="fechaHasta">
+            </div>
+          </div>
+          <div id="camposDiaLibre" class="hidden">
+            <div class="form-row">
+              <div class="form-col">
+                <label for="diaLibreFecha">Fecha del Día Libre</label>
+                <input type="date" id="diaLibreFecha">
+              </div>
+              <div class="form-col">
+                <label for="diaLibreHorario">Horario</label>
+                <input type="text" id="diaLibreHorario" placeholder="Ej: 08:00 - 12:00">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="horasAdicionales">Fechas de Horas Adicionales</label>
+              <div id="horasAdicionalesContainer">
+                <div class="form-row horasAdicionalesRow">
+                  <div class="form-col">
+                    <input type="date" class="fechaAdicional">
+                  </div>
+                  <div class="form-col">
+                    <input type="text" class="horarioAdicional" placeholder="Ej: 13:00 - 17:00">
+                  </div>
+                  <div class="form-col">
+                    <button class="btn btn-danger btnEliminarFila">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <button class="btn btn-secondary" id="btnAgregarFila">
+                <i class="fas fa-plus"></i>
+                Agregar Fecha
+              </button>
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="observaciones">Observaciones</label>
+            <textarea id="observaciones" rows="4" placeholder="Ingrese cualquier observación adicional"></textarea>
+          </div>
+          <div class="form-group">
+            <label>Evidencia</label>
+            <div class="file-upload">
+              <input type="file" id="evidenciaFile">
+              <label for="evidenciaFile" class="file-upload-label">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <span>Arrastre un archivo aquí o haga clic para seleccionar</span>
+              </label>
+            </div>
+            <div class="file-info" id="fileInfo"></div>
+            <div class="progress hidden" id="uploadProgress">
+              <div class="progress-bar" id="progressBar"></div>
+            </div>
+          </div>
+          <div class="status-message hidden" id="elegibilidadMessage"></div>
+          <div class="btn-group">
+            <button class="btn btn-primary" id="guardarBtn">
+              <i class="fas fa-save"></i>
+              Guardar Solicitud
+            </button>
+            <button class="btn btn-secondary" id="vistaPreviaBtn">
+              <i class="fas fa-eye"></i>
+              Vista Previa
+            </button>
+            <button class="btn btn-secondary" id="limpiarBtn">
+              <i class="fas fa-eraser"></i>
+              Limpiar Formulario
+            </button>
+          </div>
+        </div>
       </div>
     </div>
-  </main>
 
-  <footer>
-    <div class="container">
-      <p>© INGAVI – Apoyo Médico. Si el formulario no se muestra embebido, use el botón “Abrir en pestaña nueva”.</p>
+    <div id="historial" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fas fa-history"></i>
+            Historial de Solicitudes
+          </div>
+          <button class="btn btn-secondary" id="refreshHistorialBtn">
+            <i class="fas fa-sync-alt"></i>
+            Actualizar
+          </button>
+        </div>
+        <div class="card-body">
+          <div id="historialContent">
+            <div class="status-message status-info">
+              <i class="fas fa-info-circle"></i>
+              Cargando historial de solicitudes...
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  </footer>
-</div>
 
-<script>
-  // 1) Pega aquí tu URL de la Web App (despliegue de Apps Script):
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbxKzL9s653qf617xG5ocoIu-LZJMxoa9fdbV0dV5u4iY3FnMYS25LEl7HR4COVZjm59PQ/exec'; // <-- ACTUALIZA ESTO
+    <div id="reportes" class="tab-content">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <i class="fas fa-chart-bar"></i>
+            Reportes
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="form-row">
+            <div class="form-col">
+              <label for="reporteTipo">Tipo de Reporte</label>
+              <select id="reporteTipo">
+                <option value="">Seleccione un tipo de reporte</option>
+                <option value="mensual">Reporte Mensual</option>
+                <option value="anual">Reporte Anual</option>
+                <option value="dependencia">Reporte por Dependencia</option>
+                <option value="motivo">Reporte por Motivo</option>
+              </select>
+            </div>
+            <div class="form-col">
+              <label for="reportePeriodo">Período</label>
+              <input type="month" id="reportePeriodo">
+            </div>
+          </div>
+          <div class="btn-group">
+            <button class="btn btn-primary" id="generarReporteBtn">
+              <i class="fas fa-file-download"></i>
+              Generar Reporte
+            </button>
+          </div>
+          <div id="reporteContent"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  // Permitir que se pase por querystring ?app=URL si hace falta (útil para probar)
-  const qp = new URLSearchParams(location.search);
-  const finalUrl = qp.get('app') ? decodeURIComponent(qp.get('app')) : WEB_APP_URL;
+  <div id="vistaPreviaModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">Vista Previa de Solicitud</div>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body" id="vistaPreviaContent">
+        <!-- El contenido se cargará dinámicamente -->
+      </div>
+      <div class="btn-group">
+        <button class="btn btn-primary" id="imprimirBtn">
+          <i class="fas fa-print"></i>
+          Imprimir
+        </button>
+        <button class="btn btn-secondary" id="cerrarVistaPreviaBtn">
+          <i class="fas fa-times"></i>
+          Cerrar
+        </button>
+      </div>
+    </div>
+  </div>
 
-  const frame = document.getElementById('appFrame');
-  const spinner = document.getElementById('spinner');
-  const fallback = document.getElementById('fallback');
-  const openNewTabBtn = document.getElementById('openNewTab');
+  <div id="notification" class="notification">
+    <i class="fas fa-check-circle"></i>
+    <span id="notificationMessage">Operación completada con éxito</span>
+  </div>
 
-  function setFrameSrc() {
-    frame.src = finalUrl + (finalUrl.includes('?') ? '&' : '?') + 'embed=1';
-    openNewTabBtn.onclick = () => window.open(finalUrl, '_blank','noopener');
-  }
+  <script>
+    // Variables globales
+    let funcionarioData = null;
+    let motivosLicencia = [];
+    let historialData = [];
+    let uploadedFile = null;
 
-  // Mostrar/ocultar estados
-  frame.addEventListener('load', () => { spinner.style.display = 'none'; });
-  // Fallback por si nunca dispara "load"
-  setTimeout(() => {
-    if (spinner.style.display !== 'none') { fallback.style.display = 'block'; }
-  }, 7000);
+    // Inicialización
+    document.addEventListener('DOMContentLoaded', function() {
+      // Configurar pestañas
+      const tabs = document.querySelectorAll('.tab');
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          const tabId = this.getAttribute('data-tab');
+          switchTab(tabId);
+        });
+      });
 
-  // Ajuste de altura simple (en móviles)
-  function resize() {
-    const headerH = document.querySelector('header').offsetHeight;
-    const footerH = document.querySelector('footer').offsetHeight;
-    frame.style.height = Math.max(420, window.innerHeight - headerH - footerH - 24) + 'px';
-  }
-  window.addEventListener('resize', resize);
-  document.addEventListener('DOMContentLoaded', () => { setFrameSrc(); resize(); });
-</script>
-<noscript>Necesita activar JavaScript para ver este contenido.</noscript>
+      // Configurar botones
+      document.getElementById('buscarBtn').addEventListener('click', buscarFuncionario);
+      document.getElementById('guardarBtn').addEventListener('click', guardarSolicitud);
+      document.getElementById('vistaPreviaBtn').addEventListener('click', mostrarVistaPrevia);
+      document.getElementById('limpiarBtn').addEventListener('click', limpiarFormulario);
+      document.getElementById('motivo').addEventListener('change', onMotivoChange);
+      document.getElementById('fechaDesde').addEventListener('change', calcularDias);
+      document.getElementById('fechaHasta').addEventListener('change', calcularDias);
+      document.getElementById('btnAgregarFila').addEventListener('click', agregarFilaHorasAdicionales);
+      document.getElementById('evidenciaFile').addEventListener('change', handleFileUpload);
+      document.getElementById('refreshHistorialBtn').addEventListener('click', cargarHistorial);
+      document.getElementById('generarReporteBtn').addEventListener('click', generarReporte);
+      document.getElementById('imprimirBtn').addEventListener('click', imprimirVistaPrevia);
+      document.getElementById('cerrarVistaPreviaBtn').addEventListener('click', cerrarVistaPrevia);
+      document.querySelector('.close').addEventListener('click', cerrarVistaPrevia);
+
+      // Cargar datos iniciales
+      cargarMotivosLicencia();
+      cargarUsuario();
+      cargarHistorial();
+
+      // Agregar evento para eliminar filas de horas adicionales
+      document.addEventListener('click', function(e) {
+        if (e.target.closest('.btnEliminarFila')) {
+          const row = e.target.closest('.horasAdicionalesRow');
+          if (document.querySelectorAll('.horasAdicionalesRow').length > 1) {
+            row.remove();
+          } else {
+            showNotification('Debe mantener al menos una fila', 'warning');
+          }
+        }
+      });
+    });
+
+    // Funciones de navegación
+    function switchTab(tabId) {
+      // Ocultar todos los contenidos de pestañas
+      document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+      });
+
+      // Desactivar todas las pestañas
+      document.querySelectorAll('.tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+
+      // Mostrar el contenido de la pestaña seleccionada
+      document.getElementById(tabId).classList.add('active');
+
+      // Activar la pestaña seleccionada
+      document.querySelector(`.tab[data-tab="${tabId}"]`).classList.add('active');
+    }
+
+    // Funciones de carga de datos
+    function cargarMotivosLicencia() {
+      google.script.run
+        .withSuccessHandler(function(motivos) {
+          motivosLicencia = motivos;
+          const select = document.getElementById('motivo');
+          select.innerHTML = '<option value="">Seleccione un motivo</option>';
+          
+          motivos.forEach(motivo => {
+            const option = document.createElement('option');
+            option.value = motivo.code;
+            option.textContent = `${motivo.code} - ${motivo.desc}`;
+            select.appendChild(option);
+          });
+        })
+        .withFailureHandler(function(error) {
+          showNotification('Error al cargar los motivos de licencia: ' + error.message, 'error');
+        })
+        .getMotivosLicencia();
+    }
+
+    function cargarUsuario() {
+      google.script.run
+        .withSuccessHandler(function(email) {
+          document.getElementById('userEmail').textContent = email;
+          document.getElementById('userAvatar').textContent = email.charAt(0).toUpperCase();
+        })
+        .withFailureHandler(function(error) {
+          console.error('Error al cargar el usuario:', error);
+        })
+        .getUserEmail();
+    }
+
+    function cargarHistorial() {
+      const historialContent = document.getElementById('historialContent');
+      historialContent.innerHTML = '<div class="status-message status-info"><i class="fas fa-spinner fa-spin"></i> Cargando historial de solicitudes...</div>';
+
+      google.script.run
+        .withSuccessHandler(function(historial) {
+          historialData = historial;
+          mostrarHistorial(historial);
+        })
+        .withFailureHandler(function(error) {
+          historialContent.innerHTML = `<div class="status-message status-error"><i class="fas fa-exclamation-circle"></i> Error al cargar el historial: ${error.message}</div>`;
+        })
+        .getHistorialLicencias();
+    }
+
+    function mostrarHistorial(historial) {
+      const historialContent = document.getElementById('historialContent');
+      
+      if (!historial || historial.length === 0) {
+        historialContent.innerHTML = '<div class="status-message status-info"><i class="fas fa-info-circle"></i> No hay solicitudes registradas</div>';
+        return;
+      }
+
+      let html = '<div class="table-container"><table class="data-table"><thead><tr>';
+      html += '<th>Expediente</th><th>Fecha</th><th>Motivo</th><th>Desde</th><th>Hasta</th><th>Días</th><th>Estado</th><th>Acciones</th>';
+      html += '</tr></thead><tbody>';
+
+      historial.forEach(item => {
+        html += `<tr>
+          <td>${item.expediente || ''}</td>
+          <td>${formatDate(item.timestamp)}</td>
+          <td>${item.motivo_permiso_descripcion || ''}</td>
+          <td>${formatDate(item.fecha_permiso_desde)}</td>
+          <td>${formatDate(item.fecha_permiso_hasta)}</td>
+          <td>${item.total_dias_permiso || ''}</td>
+          <td><span class="status-badge status-${item.estado || 'pendiente'}">${item.estado || 'Pendiente'}</span></td>
+          <td>
+            <button class="btn btn-sm btn-secondary" onclick="verSolicitud('${item.id}')">
+              <i class="fas fa-eye"></i>
+            </button>
+            <button class="btn btn-sm btn-primary" onclick="imprimirSolicitud('${item.id}')">
+              <i class="fas fa-print"></i>
+            </button>
+          </td>
+        </tr>`;
+      });
+
+      html += '</tbody></table></div>';
+      historialContent.innerHTML = html;
+    }
+
+    // Funciones de búsqueda y carga de datos
+    function buscarFuncionario() {
+      const cedula = document.getElementById('cedula').value.trim();
+      
+      if (!cedula) {
+        showNotification('Por favor, ingrese su número de cédula', 'warning');
+        return;
+      }
+
+      const mensajeBusqueda = document.getElementById('mensajeBusqueda');
+      mensajeBusqueda.innerHTML = '<div class="status-message status-info"><i class="fas fa-spinner fa-spin"></i> Buscando datos del funcionario...</div>';
+
+      google.script.run
+        .withSuccessHandler(function(response) {
+          if (response.encontrado) {
+            funcionarioData = response.datos;
+            mostrarDatosFuncionario(funcionarioData);
+            mensajeBusqueda.innerHTML = '<div class="status-message status-success"><i class="fas fa-check-circle"></i> Datos encontrados correctamente</div>';
+          } else {
+            mensajeBusqueda.innerHTML = '<div class="status-message status-error"><i class="fas fa-exclamation-circle"></i> No se encontraron datos para la cédula ingresada</div>';
+            document.getElementById('datosFuncionario').classList.add('hidden');
+          }
+        })
+        .withFailureHandler(function(error) {
+          mensajeBusqueda.innerHTML = `<div class="status-message status-error"><i class="fas fa-exclamation-circle"></i> Error al buscar datos: ${error.message}</div>`;
+          document.getElementById('datosFuncionario').classList.add('hidden');
+        })
+        .findFuncionarioByCedula(cedula);
+    }
+
+    function mostrarDatosFuncionario(datos) {
+      document.getElementById('nombre').value = datos.nombre_y_apellido_completo || '';
+      document.getElementById('sexo').value = datos.sexo || '';
+      document.getElementById('fechaNacimiento').value = datos.fecha_nacimiento || '';
+      document.getElementById('dependencia').value = datos.dependencia || '';
+      document.getElementById('vinculacion').value = datos.vinculacion || '';
+      document.getElementById('contacto').value = datos.contacto || '';
+      
+      document.getElementById('datosFuncionario').classList.remove('hidden');
+    }
+
+    // Funciones de manejo de formulario
+    function onMotivoChange() {
+      const motivoSelect = document.getElementById('motivo');
+      const selectedMotivo = motivosLicencia.find(m => m.code == motivoSelect.value);
+      
+      if (selectedMotivo && selectedMotivo.code === 11) { // Día Libre
+        document.getElementById('camposDiaLibre').classList.remove('hidden');
+      } else {
+        document.getElementById('camposDiaLibre').classList.add('hidden');
+      }
+      
+      verificarElegibilidad();
+    }
+
+    function calcularDias() {
+      const fechaDesde = document.getElementById('fechaDesde').value;
+      const fechaHasta = document.getElementById('fechaHasta').value;
+      
+      if (fechaDesde && fechaHasta) {
+        const desde = new Date(fechaDesde);
+        const hasta = new Date(fechaHasta);
+        const diffTime = Math.abs(hasta - desde);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        
+        // Actualizar campo de días si existe
+        const diasField = document.getElementById('totalDias');
+        if (diasField) {
+          diasField.value = diffDays;
+        }
+        
+        verificarElegibilidad();
+      }
+    }
+
+    function verificarElegibilidad() {
+      const cedula = document.getElementById('cedula').value.trim();
+      const motivo = document.getElementById('motivo').value;
+      const fechaDesde = document.getElementById('fechaDesde').value;
+      const fechaHasta = document.getElementById('fechaHasta').value;
+      
+      if (!cedula || !motivo || !fechaDesde || !fechaHasta) {
+        document.getElementById('elegibilidadMessage').classList.add('hidden');
+        return;
+      }
+      
+      const payload = {
+        cedula: cedula,
+        motivo_permiso_codigo: motivo,
+        fecha_permiso_desde: fechaDesde,
+        fecha_permiso_hasta: fechaHasta
+      };
+      
+      document.getElementById('elegibilidadMessage').innerHTML = '<div class="status-message status-info"><i class="fas fa-spinner fa-spin"></i> Verificando elegibilidad...</div>';
+      document.getElementById('elegibilidadMessage').classList.remove('hidden');
+      
+      google.script.run
+        .withSuccessHandler(function(response) {
+          const messageEl = document.getElementById('elegibilidadMessage');
+          
+          if (response.ok) {
+            messageEl.className = 'status-message status-success';
+            messageEl.innerHTML = `<i class="fas fa-check-circle"></i> ${response.message}`;
+            document.getElementById('guardarBtn').disabled = false;
+          } else {
+            messageEl.className = 'status-message status-error';
+            messageEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${response.message}`;
+            document.getElementById('guardarBtn').disabled = true;
+          }
+        })
+        .withFailureHandler(function(error) {
+          const messageEl = document.getElementById('elegibilidadMessage');
+          messageEl.className = 'status-message status-error';
+          messageEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Error al verificar elegibilidad: ${error.message}`;
+          document.getElementById('guardarBtn').disabled = true;
+        })
+        .checkPermitEligibility(payload);
+    }
+
+    function agregarFilaHorasAdicionales() {
+      const container = document.getElementById('horasAdicionalesContainer');
+      const newRow = document.createElement('div');
+      newRow.className = 'form-row horasAdicionalesRow';
+      newRow.innerHTML = `
+        <div class="form-col">
+          <input type="date" class="fechaAdicional">
+        </div>
+        <div class="form-col">
+          <input type="text" class="horarioAdicional" placeholder="Ej: 13:00 - 17:00">
+        </div>
+        <div class="form-col">
+          <button class="btn btn-danger btnEliminarFila">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      `;
+      container.appendChild(newRow);
+    }
+
+    function handleFileUpload(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      
+      const fileInfo = document.getElementById('fileInfo');
+      const uploadProgress = document.getElementById('uploadProgress');
+      const progressBar = document.getElementById('progressBar');
+      
+      fileInfo.textContent = `Archivo seleccionado: ${file.name} (${formatFileSize(file.size)})`;
+      uploadProgress.classList.remove('hidden');
+      progressBar.style.width = '0%';
+      
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const base64 = e.target.result.split(',')[1];
+        const cedula = document.getElementById('cedula').value.trim();
+        
+        google.script.run
+          .withSuccessHandler(function(response) {
+            uploadedFile = response;
+            progressBar.style.width = '100%';
+            fileInfo.innerHTML = `<i class="fas fa-check-circle" style="color: var(--secondary);"></i> Archivo subido correctamente: <a href="${response.url}" target="_blank">${response.name}</a>`;
+            
+            setTimeout(() => {
+              uploadProgress.classList.add('hidden');
+            }, 2000);
+          })
+          .withFailureHandler(function(error) {
+            fileInfo.innerHTML = `<i class="fas fa-exclamation-circle" style="color: var(--error);"></i> Error al subir archivo: ${error.message}`;
+            uploadProgress.classList.add('hidden');
+          })
+          .withUserProgress(function(progress) {
+            progressBar.style.width = `${progress * 100}%`;
+          })
+          .subirEvidencia(base64, file.name, file.type, cedula);
+      };
+      
+      reader.readAsDataURL(file);
+    }
+
+    function guardarSolicitud() {
+      if (!funcionarioData) {
+        showNotification('Debe buscar y validar los datos del funcionario primero', 'warning');
+        return;
+      }
+      
+      const motivo = document.getElementById('motivo').value;
+      if (!motivo) {
+        showNotification('Debe seleccionar un motivo para la licencia', 'warning');
+        return;
+      }
+      
+      const fechaDesde = document.getElementById('fechaDesde').value;
+      const fechaHasta = document.getElementById('fechaHasta').value;
+      if (!fechaDesde || !fechaHasta) {
+        showNotification('Debe especificar las fechas de inicio y fin de la licencia', 'warning');
+        return;
+      }
+      
+      // Construir payload
+      const payload = {
+        cedula: funcionarioData.cedula,
+        nombre_y_apellido_completo: funcionarioData.nombre_y_apellido_completo,
+        sexo: funcionarioData.sexo,
+        fecha_nacimiento: funcionarioData.fecha_nacimiento,
+        dependencia: funcionarioData.dependencia,
+        vinculacion: funcionarioData.vinculacion,
+        contacto: funcionarioData.contacto,
+        expediente_codigo: document.getElementById('expediente').value,
+        motivo_permiso_codigo: motivo,
+        motivo_permiso_descripcion: document.getElementById('motivo').options[document.getElementById('motivo').selectedIndex].text,
+        fecha_permiso_desde: fechaDesde,
+        fecha_permiso_hasta: fechaHasta,
+        observaciones: document.getElementById('observaciones').value,
+        evidencia_url: uploadedFile ? uploadedFile.url : ''
+      };
+      
+      // Agregar campos específicos para Día Libre
+      if (motivo == 11) {
+        payload.dia_libre_fecha = document.getElementById('diaLibreFecha').value;
+        payload.dia_libre_horario = document.getElementById('diaLibreHorario').value;
+        
+        // Recopilar horas adicionales
+        const horasAdicionales = [];
+        document.querySelectorAll('.horasAdicionalesRow').forEach(row => {
+          const fecha = row.querySelector('.fechaAdicional').value;
+          const horario = row.querySelector('.horarioAdicional').value;
+          if (fecha && horario) {
+            horasAdicionales.push(`${fecha} (${horario})`);
+          }
+        });
+        payload.horas_adic_fechas = horasAdicionales.join('\n');
+      }
+      
+      // Enviar solicitud
+      document.getElementById('guardarBtn').disabled = true;
+      document.getElementById('guardarBtn').innerHTML = '<i class="fas fa-spinner fa-spin"></i> Guardando...';
+      
+      google.script.run
+        .withSuccessHandler(function(response) {
+          document.getElementById('guardarBtn').disabled = false;
+          document.getElementById('guardarBtn').innerHTML = '<i class="fas fa-save"></i> Guardar Solicitud';
+          
+          if (response.ok) {
+            showNotification('Solicitud guardada correctamente', 'success');
+            limpiarFormulario();
+            cargarHistorial();
+          } else {
+            showNotification('Error al guardar la solicitud: ' + response.message, 'error');
+          }
+        })
+        .withFailureHandler(function(error) {
+          document.getElementById('guardarBtn').disabled = false;
+          document.getElementById('guardarBtn').innerHTML = '<i class="fas fa-save"></i> Guardar Solicitud';
+          showNotification('Error al guardar la solicitud: ' + error.message, 'error');
+        })
+        .submitForm(payload);
+    }
+
+    function mostrarVistaPrevia() {
+      if (!funcionarioData) {
+        showNotification('Debe buscar y validar los datos del funcionario primero', 'warning');
+        return;
+      }
+      
+      const motivo = document.getElementById('motivo').value;
+      if (!motivo) {
+        showNotification('Debe seleccionar un motivo para la licencia', 'warning');
+        return;
+      }
+      
+      const fechaDesde = document.getElementById('fechaDesde').value;
+      const fechaHasta = document.getElementById('fechaHasta').value;
+      if (!fechaDesde || !fechaHasta) {
+        showNotification('Debe especificar las fechas de inicio y fin de la licencia', 'warning');
+        return;
+      }
+      
+      // Construir payload
+      const payload = {
+        cedula: funcionarioData.cedula,
+        nombre_y_apellido_completo: funcionarioData.nombre_y_apellido_completo,
+        sexo: funcionarioData.sexo,
+        fecha_nacimiento: funcionarioData.fecha_nacimiento,
+        dependencia: funcionarioData.dependencia,
+        vinculacion: funcionarioData.vinculacion,
+        contacto: funcionarioData.contacto,
+        expediente_codigo: document.getElementById('expediente').value,
+        motivo_permiso_codigo: motivo,
+        motivo_permiso_descripcion: document.getElementById('motivo').options[document.getElementById('motivo').selectedIndex].text,
+        fecha_permiso_desde: fechaDesde,
+        fecha_permiso_hasta: fechaHasta,
+        observaciones: document.getElementById('observaciones').value,
+        evidencia_url: uploadedFile ? uploadedFile.url : ''
+      };
+      
+      // Agregar campos específicos para Día Libre
+      if (motivo == 11) {
+        payload.dia_libre_fecha = document.getElementById('diaLibreFecha').value;
+        payload.dia_libre_horario = document.getElementById('diaLibreHorario').value;
+        
+        // Recopilar horas adicionales
+        const horasAdicionales = [];
+        document.querySelectorAll('.horasAdicionalesRow').forEach(row => {
+          const fecha = row.querySelector('.fechaAdicional').value;
+          const horario = row.querySelector('.horarioAdicional').value;
+          if (fecha && horario) {
+            horasAdicionales.push(`${fecha} (${horario})`);
+          }
+        });
+        payload.horas_adic_fechas = horasAdicionales.join('\n');
+      }
+      
+      // Generar vista previa
+      const modal = document.getElementById('vistaPreviaModal');
+      const content = document.getElementById('vistaPreviaContent');
+      content.innerHTML = '<div class="status-message status-info"><i class="fas fa-spinner fa-spin"></i> Generando vista previa...</div>';
+      modal.style.display = 'block';
+      
+      google.script.run
+        .withSuccessHandler(function(html) {
+          content.innerHTML = html;
+        })
+        .withFailureHandler(function(error) {
+          content.innerHTML = `<div class="status-message status-error"><i class="fas fa-exclamation-circle"></i> Error al generar vista previa: ${error.message}</div>`;
+        })
+        .getPrintHtml(payload);
+    }
+
+    function imprimirVistaPrevia() {
+      window.print();
+    }
+
+    function cerrarVistaPrevia() {
+      document.getElementById('vistaPreviaModal').style.display = 'none';
+    }
+
+    function limpiarFormulario() {
+      document.getElementById('cedula').value = '';
+      document.getElementById('expediente').value = '';
+      document.getElementById('motivo').value = '';
+      document.getElementById('fechaDesde').value = '';
+      document.getElementById('fechaHasta').value = '';
+      document.getElementById('observaciones').value = '';
+      document.getElementById('evidenciaFile').value = '';
+      document.getElementById('fileInfo').textContent = '';
+      document.getElementById('datosFuncionario').classList.add('hidden');
+      document.getElementById('camposDiaLibre').classList.add('hidden');
+      document.getElementById('elegibilidadMessage').classList.add('hidden');
+      
+      // Resetear horas adicionales
+      const container = document.getElementById('horasAdicionalesContainer');
+      container.innerHTML = `
+        <div class="form-row horasAdicionalesRow">
+          <div class="form-col">
+            <input type="date" class="fechaAdicional">
+          </div>
+          <div class="form-col">
+            <input type="text" class="horarioAdicional" placeholder="Ej: 13:00 - 17:00">
+          </div>
+          <div class="form-col">
+            <button class="btn btn-danger btnEliminarFila">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      `;
+      
+      funcionarioData = null;
+      uploadedFile = null;
+    }
+
+    function generarReporte() {
+      const tipo = document.getElementById('reporteTipo').value;
+      const periodo = document.getElementById('reportePeriodo').value;
+      
+      if (!tipo) {
+        showNotification('Debe seleccionar un tipo de reporte', 'warning');
+        return;
+      }
+      
+      if (!periodo) {
+        showNotification('Debe seleccionar un período', 'warning');
+        return;
+      }
+      
+      const content = document.getElementById('reporteContent');
+      content.innerHTML = '<div class="status-message status-info"><i class="fas fa-spinner fa-spin"></i> Generando reporte...</div>';
+      
+      google.script.run
+        .withSuccessHandler(function(response) {
+          if (response.ok) {
+            content.innerHTML = `<div class="status-message status-success"><i class="fas fa-check-circle"></i> Reporte generado correctamente: <a href="${response.url}" target="_blank">Descargar</a></div>`;
+          } else {
+            content.innerHTML = `<div class="status-message status-error"><i class="fas fa-exclamation-circle"></i> Error al generar reporte: ${response.message}</div>`;
+          }
+        })
+        .withFailureHandler(function(error) {
+          content.innerHTML = `<div class="status-message status-error"><i class="fas fa-exclamation-circle"></i> Error al generar reporte: ${error.message}</div>`;
+        })
+        .generarReporte(tipo, periodo);
+    }
+
+    // Funciones de utilidad
+    function formatDate(dateString) {
+      if (!dateString) return '';
+      
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString;
+      
+      return date.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    }
+
+    function formatFileSize(bytes) {
+      if (bytes === 0) return '0 Bytes';
+      
+      const k = 1024;
+      const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+      const i = Math.floor(Math.log(bytes) / Math.log(k));
+      
+      return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+    }
+
+    function showNotification(message, type = 'info') {
+      const notification = document.getElementById('notification');
+      const notificationMessage = document.getElementById('notificationMessage');
+      
+      notification.className = 'notification notification-' + type;
+      notificationMessage.textContent = message;
+      
+      // Actualizar icono según el tipo
+      const icon = notification.querySelector('i');
+      icon.className = type === 'success' ? 'fas fa-check-circle' :
+                      type === 'error' ? 'fas fa-exclamation-circle' :
+                      type === 'warning' ? 'fas fa-exclamation-triangle' :
+                      'fas fa-info-circle';
+      
+      notification.classList.add('show');
+      
+      setTimeout(() => {
+        notification.classList.remove('show');
+      }, 5000);
+    }
+
+    function verSolicitud(id) {
+      // Implementar función para ver detalles de una solicitud
+      showNotification('Función en desarrollo', 'info');
+    }
+
+    function imprimirSolicitud(id) {
+      // Implementar función para imprimir una solicitud
+      showNotification('Función en desarrollo', 'info');
+    }
+  </script>
+
+  <?!= include('Styles'); ?>
 </body>
 </html>
 
+<script>
+  // Backend Code.gs
+  /***************  CONFIGURACIÓN  *****************/
+  const SPREADSHEET_ID = '1WCc53pIAmfcnpkI60P9DmadhZEPgzvvC6i-xA1Id4pI';
+  const SHEET_FUNC = 'funcionariosIngavi';
+  const SHEET_REGISTRO = 'registro_pcc';
+  const SHEET_DEPENDENCIAS = 'dicc_dependencias';
+  const TZ = 'America/Asuncion';
+  const FOLDER_ID = '1SljMIMOJ8sNF8v7cqw52eIu35uuH5EG7';
+  const CACHE_TTL_FUNC = 600; // 10 min: funcionarios
+  const CACHE_TTL_ACUM = 300; // 5 min: acumulados
+
+  /***************  CATÁLOGO / NORMATIVA  *****************/
+  const PERMISOS = [
+    { code: 3, desc: 'PERMISO POR EXAMEN FINAL' },
+    { code: 8, desc: 'PERMISO PARTICULAR' },
+    { code: 11, desc: 'DIA LIBRE' },
+    { code: 14, desc: 'PERMISO POR PATERNIDAD (LEY 5508/15 - ART. 13 INC. A)' },
+    { code: 15, desc: 'PERMISO P/ FALLEC. DEL(LA) PADRE/MADRE' },
+    { code: 16, desc: 'PERMISO P/ FALLEC. DEL(LA) HERMANO(NA)' },
+    { code: 17, desc: 'PERMISO P/ FALLEC. DEL CONYUGE/CONCUBINO' },
+    { code: 18, desc: 'PERMISO P/ FALLEC. DEL ABUELO(LA)' },
+    { code: 19, desc: 'PERMISO P/ MATRIMONIO' },
+    { code: 20, desc: 'PERMISO P/ ENFERMEDAD DEL CONYUGE/CONCUBINO' },
+    { code: 21, desc: 'PERMISO P/ ENFERMEDAD DEL HIJO(A)' },
+    { code: 22, desc: 'PERMISO P/ ENFERMEDAD DEL PADRE/MADRE' },
+    { code: 23, desc: 'CONSULTA MEDICA' },
+    { code: 80, desc: 'DISERTANTE (ART. 39 INC. E)' },
+    { code: 119, desc: 'CONSULTA MEDICA ALTA COMPLEJIDAD' },
+    { code: 120, desc: 'CIRUGIA PROGRAMADA' },
+    { code: 121, desc: 'ESTUDIO MEDICO ALTA COMPLEJIDAD' },
+    { code: 125, desc: 'PROBLEMAS DE SALUD DURANTE JORNADA LABORAL' },
+    { code: 126, desc: 'DISMENORREA' },
+    { code: 127, desc: 'PAPANICOLAU' },
+    { code: 128, desc: 'MAMOGRAFIA' },
+    { code: 131, desc: 'DIA DEL FUNCIONARIO PUBLICO' }
+  ];
+
+  const RULES_BY_CODE = {
+    3: { type: 'days_per_year', limitDays: 12 },
+    8: { type: 'days_per_month', limitDays: 1 },
+    11: { type: 'none' }, // Día Libre (compensación) – sin tope acumulativo en esta lógica
+    14: { type: 'days_per_event_max', limitDaysPerEvent: 21 },
+    19: { type: 'days_per_event_max', limitDaysPerEvent: 10 },
+    20: { type: 'days_per_year', limitDays: 30 },
+    21: { type: 'days_per_year', limitDays: 30 },
+    22: { type: 'days_per_year', limitDays: 30 },
+    23: { type: 'days_per_year', limitDays: 10 },
+    80: { type: 'days_per_year', limitDays: 8 },
+    119: { type: 'days_per_year', limitDays: 10 },
+    120: { type: 'days_per_year', limitDays: 10 },
+    121: { type: 'days_per_year', limitDays: 10 },
+    125: { type: 'events_per_year', limitEvents: 8 },
+    126: { type: 'days_per_month', limitDays: 1 },
+    127: { type: 'days_per_year', limitDays: 2 },
+    128: { type: 'days_per_year', limitDays: 2 },
+    131: { type: 'days_per_year', limitDays: 1 }
+  };
+
+  const DEFAULT_DEP_TREE = {
+    'Oficina de Coordinación': [],
+    'Departamento Médico': [
+      'Servicio de Traumatología',
+      'Servicio de Urología',
+      'Servicio de Cirugía General',
+      'Servicio de Neurocirugía',
+      'Servicio de Mastología',
+      'Servicio de Terapia Intensiva',
+      'Servicio de Anestesia y Reanimación',
+      'Servicio de Quirófano',
+      'Servicio de Anatomía Patológica',
+      'Servicio de Medicina Transfusional',
+      'Servicio de Fisioterapia',
+      'Área Banco de Tejidos'
+    ],
+    'Departamento de Apoyo Médico': [
+      'Apoyo Médico',
+      'Servicio de Imágenes',
+      'Servicio de Laboratorio',
+      'Servicio de Farmacia',
+      'Área Farmacia Ambulatoria',
+      'Área Farmacia Internados',
+      'Servicio de Nutrición y Cocina',
+      'Área Esterilización'
+    ],
+    'Departamento de Administración y Logística': [
+      'Sección Administrativa',
+      'Sección Servicios Generales',
+      'Sección Gestión de Pacientes'
+    ],
+    'Departamento Policlínico': [
+      'Área Urgencias',
+      'Área Consultas Ambulatorias'
+    ]
+  };
+
+  /***************  HTTP: RENDER *****************/
+  function doGet(e) {
+    try {
+      if (e && e.parameter && e.parameter.ping) {
+        return ContentService.createTextOutput('OK')
+          .setMimeType(ContentService.MimeType.TEXT);
+      }
+      const tpl = HtmlService.createTemplateFromFile('Index');
+      return tpl.evaluate()
+        .setTitle('PCC – Talento Humano INGAVI')
+        .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
+    } catch (err) {
+      return ContentService.createTextOutput('ERROR: ' + (err?.message || String(err)))
+        .setMimeType(ContentService.MimeType.TEXT);
+    }
+  }
+
+  function include(filename) {
+    return HtmlService.createHtmlOutputFromFile(filename).getContent();
+  }
+
+  /***************  UTILIDADES  *****************/
+  function _ss() { return SpreadsheetApp.openById(SPREADSHEET_ID); }
+  function _timestamp() { return Utilities.formatDate(new Date(), TZ, "yyyy-MM-dd'T'HH:mm:ss"); }
+  function _normCI(s) { return String(s || '').replace(/\D+/g, ''); }
+  function _stripDiacritics_(s){ return String(s || '').normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+  function _normHeader_(s){ return _stripDiacritics_(String(s || '').toLowerCase().replace(/\s+/g, ' ').trim()); }
+  function _normTxt_(s){ return _stripDiacritics_(String(s || '').toLowerCase()).replace(/\s+/g,' ').trim(); }
+
+  function _toDate_(v){
+    if (v instanceof Date && !isNaN(v)) return new Date(v.getFullYear(), v.getMonth(), v.getDate());
+    const s = String(v || '').trim(); if (!s) return null;
+    let m = s.match(/^(\d{4})-(\d{2})-(\d{2})/); if (m) return new Date(+m[1], +m[2]-1, +m[3]);
+    m = s.match(/^(\d{2})\/(\d{2})\/(\d{4})/);    if (m) return new Date(+m[3], +m[2]-1, +m[1]);
+    const d = new Date(s); return isNaN(d) ? null : new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  }
+  function _calendarDaysInclusive_(d1, d2){
+    const from = d1 <= d2 ? d1 : d2, to = d2 >= d1 ? d2 : d1;
+    return Math.floor((to - from) / 86400000) + 1;
+  }
+  function _businessDaysBetween_(d1, d2){
+    const from = d1 <= d2 ? d1 : d2, to = d2 >= d1 ? d2 : d1;
+    let days = 0;
+    for (let d = new Date(from); d <= to; d = new Date(d.getFullYear(), d.getMonth(), d.getDate() + 1)) {
+      const wd = d.getDay(); if (wd !== 0 && wd !== 6) days++;
+    }
+    return days;
+  }
+
+  /***************  MAPEO DE MOTIVOS  *****************/
+  function _descToCodeFlexible_(desc){
+    const q = _normTxt_(desc);
+    if (q.includes('examen') && q.includes('final')) return 3;
+    if (q.includes('permiso particular') || q.includes('casos particulares')) return 8;
+    if (q.includes('dia libre')) return 11;
+    if (q.includes('paternidad')) return 14;
+    if (q.includes('fallec') && (q.includes('padre') || q.includes('madre'))) return 15;
+    if (q.includes('fallec') && q.includes('herman')) return 16;
+    if (q.includes('fallec') && (q.includes('conyuge') || q.includes('concubin'))) return 17;
+    if (q.includes('fallec') && q.includes('abuelo')) return 18;
+    if (q.includes('matrimonio')) return 19;
+    if (q.includes('enfermedad') && (q.includes('conyuge') || q.includes('concubin'))) return 20;
+    if (q.includes('enfermedad') && q.includes('hijo')) return 21;
+    if (q.includes('enfermedad') && (q.includes('padre') || q.includes('madre'))) return 22;
+    if (q.includes('consulta medica alta complejidad')) return 119;
+    if (q.includes('cirugia programada')) return 120;
+    if (q.includes('estudio medico alta complejidad')) return 121;
+    if (q.includes('consulta medica')) return 23;
+    if (q.includes('disertante') || q.includes('art. 39') || q.includes('art 39')) return 80;
+    if (q.includes('durante la jornada')) return 125;
+    if (q.includes('dismenorrea')) return 126;
+    if (q.includes('papanicola') || q === 'pap') return 127;
+    if (q.includes('mamograf')) return 128;
+    if (q.includes('dia del funcionario publico') || q.includes('día del funcionario público')) return 131;
+    for (const p of PERMISOS){ const d = _normTxt_(p.desc); if (d && (d === q || d.includes(q) || q.includes(d))) return p.code; }
+    return null;
+  }
+  function _resolvePermFromPayload_(payload){
+    let code = null, desc = '';
+    if (payload && payload.motivo_permiso_codigo != null && payload.motivo_permiso_codigo !== '') {
+      const n = Number(payload.motivo_permiso_codigo); if (!isNaN(n)) code = n;
+    }
+    desc = String(payload?.motivo_permiso_descripcion || '').trim();
+    if ((code == null) && desc) code = _descToCodeFlexible_(desc);
+    if ((!desc || !desc.length) && code != null){
+      const found = PERMISOS.find(p => p.code === code); if (found) desc = found.desc;
+    }
+    return { code, desc };
+  }
+  function _ruleForCode_(code){
+    if (code != null && RULES_BY_CODE.hasOwnProperty(code)) return RULES_BY_CODE[code];
+    return { type: 'none' };
+  }
+
+  /***************  UI INIT *****************/
+  function getInitData(){
+    try {
+      return {
+        permisos: PERMISOS,
+        dependencias: _readDependencias_()
+      };
+    } catch (e) {
+      return { permisos: PERMISOS, dependencias: Object.keys(DEFAULT_DEP_TREE) };
+    }
+  }
+
+  /***************  CACHÉ: FUNCIONARIOS *****************/
+  function _cacheGet_(k){ try { return CacheService.getScriptCache().get(k); } catch(e){ return null; } }
+  function _cachePut_(k, v, ttl){ try { CacheService.getScriptCache().put(k, v, ttl); } catch(e){} }
+
+  function _colIndex_(hdr, ...names){
+    const norm = s => _normHeader_(s);
+    for (const n of names) {
+      const i = hdr.indexOf(norm(n));
+      if (i >= 0) return i;
+    }
+    return -1;
+  }
+
+  function _funcMapFromSheet_(){
+    const ss = _ss();
+    const sh = ss.getSheetByName(SHEET_FUNC);
+    if (!sh || sh.getLastRow() < 2) return {};
+
+    const vals = sh.getDataRange().getValues();
+    const hdr  = vals.shift().map(_normHeader_);
+
+    const c = {
+      cedula: hdr.indexOf('cedula'),
+      sexo: hdr.indexOf('sexo'),
+      nac: (function(){
+        const cands = ['fecha_de_nacimiento','fecha nacimiento','fechanac','fecha_nacimiento'];
+        for (const k of cands){ const i = hdr.indexOf(k); if (i >= 0) return i; }
+        return -1;
+      })(),
+      dep: hdr.indexOf('dependencia'),
+      vinc: (function(){
+        const cands = ['tipovinculacion','vinculacion','tipo_vinculacion','tipo vinculacion'];
+        for (const k of cands){ const i = hdr.indexOf(k); if (i >= 0) return i; }
+        return -1;
+      })(),
+      contacto: (function(){
+        const cands = ['nrocontacto','contacto','telefono','tel','celular'];
+        for (const k of cands){ const i = hdr.indexOf(k); if (i >= 0) return i; }
+        return -1;
+      })(),
+      nomcomp: (function(){
+        const cands = [
+          'nombre_y_apellido_completo','nombres y apellidos','nombre y apellido',
+          'nombres_apellidos','nombre_apellido','nombre completo'
+        ];
+        for (const k of cands){ const i = hdr.indexOf(k); if (i >= 0) return i; }
+        return -1;
+      })(),
+      mail: (function(){
+        const cands = [
+          'correo_institucional','correo institucional','email institucional',
+          'correo','correo_electronico','correo electronico','email','mail','correo_inst'
+        ];
+        for (const k of cands){ const i = hdr.indexOf(k); if (i >= 0) return i; }
+        return -1;
+      })()
+    };
+
+    const map = {};
+    for (const r of vals){
+      const ci = _normCI(r[c.cedula]);
+      if (!ci) continue;
+
+      map[ci] = {
+        cedula: ci,
+        nombre_y_apellido_completo: String(c.nomcomp>=0 ? (r[c.nomcomp]||'') : '').trim(),
+        sexo: String(r[c.sexo]||'').trim(),
+        fecha_nacimiento: (function(v){
+          if (v instanceof Date) return Utilities.formatDate(v, TZ, 'yyyy-MM-dd');
+          const d = _toDate_(v); return d ? Utilities.formatDate(d, TZ, 'yyyy-MM-dd') : '';
+        })(r[c.nac]),
+        dependencia: String(r[c.dep]||'').trim(),
+        vinculacion: String(r[c.vinc]||'').trim(),
+        contacto: String(r[c.contacto]||'').trim(),
+        user_email: c.mail >= 0 ? String(r[c.mail]||'').trim().toLowerCase() : ''
+      };
+    }
+    return map;
+  }
+
+  function _getFuncMapCached_(){
+    const CK = 'FUNC_MAP';
+    let cached = _cacheGet_(CK);
+    let map = cached ? JSON.parse(cached) : null;
+    if (!map){ map = _funcMapFromSheet_(); _cachePut_(CK, JSON.stringify(map), CACHE_TTL_FUNC); }
+    return map;
+  }
+
+  function _fetchEmailByCI(ci){
+    try {
+      const map = _getFuncMapCached_();
+      return map[ci]?.user_email || '';
+    } catch(e){ return ''; }
+  }
+
+  function findFuncionarioByCedula(cedulaInput){
+    const ci = _normCI(cedulaInput);
+    if (!ci) return { encontrado:false, datos:{} };
+    const map = _getFuncMapCached_();
+    const datos = map[ci];
+    return datos ? { encontrado:true, datos } : { encontrado:false, datos:{ cedula: ci } };
+  }
+
+  /***************  CACHÉ: ACUMULADOS REGISTRO *****************/
+  function _regSchema_(hdr){
+    return {
+      ci:   hdr.indexOf('cedula'),
+      f1:   hdr.indexOf('fecha_permiso_desde'),
+      f2:   hdr.indexOf('fecha_permiso_hasta'),
+      code: hdr.indexOf('motivo_permiso_codigo'),
+      desc: hdr.indexOf('motivo_permiso_descripcion')
+    };
+  }
+  function _buildAcum_(){
+    const ss=_ss(); const sh=ss.getSheetByName(SHEET_REGISTRO);
+    if (!sh || sh.getLastRow()<2) return {};
+    const hdr = sh.getRange(1,1,1,sh.getLastColumn()).getValues()[0].map(_normHeader_);
+    const c = _regSchema_(hdr);
+    const vals = sh.getRange(2,1,sh.getLastRow()-1,sh.getLastColumn()).getValues();
+
+    const acum = {}; // ci -> year -> { months:{}, yearDays:{}, yearEvents:{} }
+    vals.forEach(r=>{
+      const ci = _normCI(r[c.ci]); if(!ci) return;
+      const code = (function(){
+        const raw = r[c.code];
+        if (raw!=='' && raw!=null && !isNaN(Number(raw))) return Number(raw);
+        if (c.desc>=0) return _descToCodeFlexible_(r[c.desc]);
+        return null;
+      })();
+      const d1 = _toDate_(r[c.f1]); const d2 = _toDate_(r[c.f2]);
+      if (!code || !d1 || !d2) return;
+      const year = d1.getFullYear(); const month = d1.getMonth()+1;
+      const bd = _businessDaysBetween_(d1, d2);
+      if (!acum[ci]) acum[ci]={};
+      if (!acum[ci][year]) acum[ci][year]={ months:{}, yearDays:{} , yearEvents:{} };
+      if (!acum[ci][year].months[month]) acum[ci][year].months[month]={};
+      if (!acum[ci][year].months[month][code]) acum[ci][year].months[month][code]={days:0, events:0};
+      if (!acum[ci][year].yearDays[code])   acum[ci][year].yearDays[code]=0;
+      if (!acum[ci][year].yearEvents[code]) acum[ci][year].yearEvents[code]=0;
+
+      acum[ci][year].months[month][code].days   += bd;
+      acum[ci][year].months[month][code].events += 1;
+      acum[ci][year].yearDays[code]             += bd;
+      acum[ci][year].yearEvents[code]           += 1;
+    });
+    return acum;
+  }
+  function _getAcumCached_(){
+    const CK='ACUM_MAP';
+    let s=_cacheGet_(CK); let map=s?JSON.parse(s):null;
+    if(!map){ map=_buildAcum_(); _cachePut_(CK, JSON.stringify(map), CACHE_TTL_ACUM); }
+    return map;
+  }
+  function _invalidateCaches_(){
+    try { CacheService.getScriptCache().removeAll(['FUNC_MAP','ACUM_MAP']); } catch(e){}
+  }
+
+  /***************  ELEGIBILIDAD / TOPES  *****************/
+  function checkPermitEligibility(payload){
+    const ci = _normCI(payload?.cedula);
+    if (!ci) return { ok:false, message:'C.I. vacío' };
+
+    const { code, desc } = _resolvePermFromPayload_(payload);
+    if (code == null) return { ok:false, message:'No se pudo identificar el código del permiso.' };
+    const rule = _ruleForCode_(code);
+
+    const d1 = _toDate_(payload?.fecha_permiso_desde); 
+    const d2 = _toDate_(payload?.fecha_permiso_hasta);
+    if (!d1 || !d2) return { ok:false, message:'Fechas inválidas' };
+
+    if (code === 11){
+      const fechaLibre  = String(payload?.dia_libre_fecha || '').trim();
+      const horarioLibre= String(payload?.dia_libre_horario || '').trim();
+      const horasAdic   = (payload?.horas_adic_fechas != null) ? String(payload.horas_adic_fechas).trim() : '';
+      if (!fechaLibre || !horarioLibre || !horasAdic){
+        return { ok:false, message:'Día Libre requiere fecha/horario a liberar y detalle de horas adicionales.' };
+      }
+      return { ok:true, message:'Día Libre (compensación): validado.' };
+    }
+
+    const reqDaysBusiness = _businessDaysBetween_(d1, d2);
+    const year = d1.getFullYear(); const month = d1.getMonth() + 1;
+    const acum = _getAcumCached_();
+
+    const yearNode   = acum[ci] && acum[ci][year] ? acum[ci][year] : { months:{}, yearDays:{}, yearEvents:{} };
+    const monthNode  = yearNode.months[month] || {};
+    const usedYear   = Number(yearNode.yearDays[code]   || 0);
+    const usedMonth  = Number((monthNode[code] && monthNode[code].days) || 0);
+    const usedEvents = Number(yearNode.yearEvents[code] || 0);
+
+    if (rule.type === 'none') return { ok:true, message:`"${desc}": sin tope acumulativo.` };
+
+    if (rule.type === 'days_per_event_max'){
+      if (reqDaysBusiness > (rule.limitDaysPerEvent || 0)){
+        return { ok:false, message:`Seleccionó ${reqDaysBusiness} día(s) hábiles, máximo por evento ${rule.limitDaysPerEvent} para "${desc}".` };
+      }
+      return { ok:true, message:`Dentro del máximo por evento (${rule.limitDaysPerEvent}).` };
+    }
+
+    if (rule.type === 'events_per_year'){
+      const limit = rule.limitEvents || 0;
+      if ((usedEvents + 1) > limit){
+        return { ok:false, message:`Ya registra ${usedEvents}/${limit} eventos en ${year} para "${desc}".` };
+      }
+      return { ok:true, message:`Eventos en ${year}: ${usedEvents}/${limit}.` };
+    }
+
+    if (rule.type === 'days_per_year'){
+      const limit = rule.limitDays || 0;
+      if ((usedYear + reqDaysBusiness) > limit){
+        return { ok:false, message:`Acumulado ${usedYear} + solicitado ${reqDaysBusiness} > ${limit} día(s) hábiles en ${year} para "${desc}".` };
+      }
+      return { ok:true, message:`Año ${year}: ${usedYear}/${limit} + ${reqDaysBusiness}.` };
+    }
+
+    if (rule.type === 'days_per_month'){
+      const limit = rule.limitDays || 0;
+      if ((usedMonth + reqDaysBusiness) > limit){
+        return { ok:false, message:`Mes ${year}-${String(month).padStart(2,'0')}: ${usedMonth} + ${reqDaysBusiness} > ${limit} día(s) hábiles para "${desc}".` };
+      }
+      return { ok:true, message:`Mes ${year}-${String(month).padStart(2,'0')}: ${usedMonth}/${limit} + ${reqDaysBusiness}.` };
+    }
+
+    return { ok:true, message:'OK' };
+  }
+
+  /***************  ESQUEMA Y ESCRITURA EN registro_pcc  *****************/
+  const REG_HEADERS = [
+    'timestamp',
+    'expediente_codigo',
+    'cedula',
+    'nombre_y_apellido_completo',
+    'sexo',
+    'fecha_nacimiento',
+    'dependencia',
+    'vinculacion',
+    'contacto',
+    'fecha_permiso_desde',
+    'fecha_permiso_hasta',
+    'total_dias_permiso',
+    'motivo_permiso_codigo',
+    'motivo_permiso_descripcion',
+    'observaciones',
+    'docs_adjuntos_texto',
+    'evidencia_url',
+    'pdf_url',
+    'user_email',
+    'dia_libre_fecha',
+    'dia_libre_horario',
+    'horas_adic_fechas',
+    'horas_adic_total',
+    'payload_json'
+  ];
+
+  function _ensureRegistroHeaders_(sh){
+    if (sh.getLastRow() === 0){
+      sh.getRange(1,1,1,REG_HEADERS.length).setValues([REG_HEADERS]); return;
+    }
+    const existing = sh.getRange(1,1,1,Math.max(sh.getLastColumn(), REG_HEADERS.length)).getValues()[0];
+    const ok = REG_HEADERS.every((h,i) => String(existing[i] || '') === h);
+    if (!ok) sh.getRange(1,1,1,REG_HEADERS.length).setValues([REG_HEADERS]);
+  }
+
+  function _getFolder_(){
+    if (FOLDER_ID) return DriveApp.getFolderById(FOLDER_ID);
+    return DriveApp.getRootFolder();
+  }
+
+  /****************** SUBIDA DE EVIDENCIA ******************/
+  function subirEvidencia(base64, filename, mimeType, cedula){
+    if (!base64) throw new Error('Archivo vacío');
+    const bytes = Utilities.base64Decode(base64);
+    const ci = _normCI(cedula || '');
+    const name = (ci ? `${ci}_` : '') + (filename || ('evidencia_' + Date.now()));
+    const blob  = Utilities.newBlob(bytes, mimeType || MimeType.PDF, name);
+    const folder = _getFolder_();
+    const file = folder.createFile(blob).setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    const url = 'https://drive.google.com/file/d/' + file.getId() + '/view?usp=drivesdk';
+    return { id:file.getId(), url, name:file.getName() };
+  }
+
+  /****************** RELLENO HTML (Print / Print_DiaLibre) ******************/
+  function _kvBasico_(payload){
+    const d1 = _toDate_(payload.fecha_permiso_desde);
+    const d2 = _toDate_(payload.fecha_permiso_hasta);
+
+    const vinc = _normTxt_(payload.vinculacion || '');
+    const marksV = {
+      V_PERM: vinc.includes('permanente') ? '☑' : '□',
+      V_CONT: vinc.includes('contrat')    ? '☑' : '□',
+      V_RES : vinc.includes('residen')    ? '☑' : '□',
+      V_COM : vinc.includes('comision')   ? '☑' : '□'
+    };
+
+    return Object.assign({
+      EXPEDIENTE:      String(payload.expediente_codigo || ''),
+      NOMBRE_APELLIDO: String(payload.nombre_y_apellido_completo || payload.nombre_completo || ''),
+      CI:              String(_normCI(payload.cedula || '')),
+      DEPENDENCIA:     String(payload.dependencia || ''),
+      CONTACTO:        String(payload.contacto || ''),
+      FECHA_DESDE:     d1 ? Utilities.formatDate(d1, TZ, 'dd/MM/yyyy') : String(payload.fecha_permiso_desde || ''),
+      FECHA_HASTA:     d2 ? Utilities.formatDate(d2, TZ, 'dd/MM/yyyy') : String(payload.fecha_permiso_hasta || ''),
+      OBS:             String(payload.observaciones || ''),
+      DOCS:            String(payload.docs_adjuntos_texto || ''),
+      EVIDENCIA_LINK:  String(payload.evidencia_url || ''),
+      LACTANCIA_HORARIO:     String(payload.lactancia_horario || ''),
+      LACTANCIA_RES_HORARIO: String(payload.lactancia_res_horario || '')
+    }, marksV);
+  }
+
+  function _fillPrintHtmlGeneral_(payload){
+    const { code } = _resolvePermFromPayload_(payload);
+
+    const M = {
+      15:'T_M1_PAD', 16:'T_M1_HER', 17:'T_M1_CONY', 18:'T_M1_ABU', 21:'T_M1_HIJ',
+      19:'T_M2', 3:'T_M3',
+      20:'T_M4_CONY', 22:'T_M4_PAD',
+      5:'T_M5', 23:'T_M6', 126:'T_M7', 124:'T_M8', 125:'T_M9',
+      127:'T_M10', 128:'T_M10', 32:'T_M11',
+      8:'T_M12', 131:'T_M13', 14:'T_M14', 15:'T_M15', 16:'T_M16'
+    };
+    const causalKeys = [
+      'T_M1_ABU','T_M1_PAD','T_M1_HIJ','T_M1_HER','T_M1_CONY',
+      'T_M2','T_M3',
+      'T_M4_CONY','T_M4_HIJ','T_M4_MAD','T_M4_PAD','T_M4_HER',
+      'T_M5','T_M6','T_M7','T_M8','T_M9','T_M10','T_M11',
+      'T_M12','T_M13','T_M14','T_M15','T_M16'
+    ];
+
+    const KV = _kvBasico_(payload);
+    causalKeys.forEach(k => KV[k] = KV[k] || '□');
+    const targetKey = M[code]; if (targetKey) KV[targetKey] = '☑';
+
+    let html = HtmlService.createHtmlOutputFromFile('Print').getContent();
+    Object.keys(KV).forEach(k => { html = html.replace(new RegExp('\\{\\{\\s*'+k+'\\s*\\}\\}','g'), KV[k]); });
+    html = html.replace(/\{\{\s*[A-Z0-9_]+\s*\}\}/g, '');
+
+    const btnBar = '<div style="position:sticky;top:0;padding:6px;text-align:right;border-bottom:1px solid #ddd;background:#fff"><button onclick="window.print()" style="padding:8px 12px;border:1px solid #999;border-radius:8px;background:#f7f7f7;cursor:pointer">Imprimir / PDF</button></div>';
+    html = html.replace('<body>', '<body>' + btnBar);
+    return html;
+  }
+
+  function _fillPrintHtmlDiaLibre_(payload){
+    const KV = _kvBasico_(payload);
+
+    const fechaLibre   = String(payload?.dia_libre_fecha || '').trim();
+    const horarioLibre = String(payload?.dia_libre_horario || '').trim();
+
+    let horasAdic = payload?.horas_adic_fechas;
+    if (Array.isArray(horasAdic)) horasAdic = horasAdic.join('\n');
+    horasAdic = String(horasAdic || '').trim();
+
+    const dLibre = _toDate_(fechaLibre);
+    KV['DIA_LIBRE_FECHA']  = dLibre ? Utilities.formatDate(dLibre, TZ, 'dd/MM/yyyy') : fechaLibre;
+    KV['DIA_LIBRE_HORARIO']= horarioLibre;
+    KV['HORAS_ADICIONALES']= horasAdic.replace(/\r?\n/g, '<br>');
+
+    let html = HtmlService.createHtmlOutputFromFile('Print_DiaLibre').getContent();
+    Object.keys(KV).forEach(k => { html = html.replace(new RegExp('\\{\\{\\s*'+k+'\\s*\\}\\}','g'), KV[k]); });
+    html = html.replace(/\{\{\s*[A-Z0-9_]+\s*\}\}/g, '');
+
+    const btnBar = '<div style="position:sticky;top:0;padding:6px;text-align:right;border-bottom:1px solid #ddd;background:#fff"><button onclick="window.print()" style="padding:8px 12px;border:1px solid #999;border-radius:8px;background:#f7f7f7;cursor:pointer">Imprimir / PDF</button></div>';
+    html = html.replace('<body>', '<body>' + btnBar);
+    return html;
+  }
+
+  function _fillPrintHtml_(payload){
+    const { code } = _resolvePermFromPayload_(payload);
+    if (code === 11) return _fillPrintHtmlDiaLibre_(payload);
+    return _fillPrintHtmlGeneral_(payload);
+  }
+
+  /****************** GENERAR Y GUARDAR PDF ******************/
+  function generarYGuardarPdf(payload){
+    const html = _fillPrintHtml_(payload);
+    const blobPdf = Utilities.newBlob(html, 'text/html', 'pcc.html').getAs(MimeType.PDF);
+    const ci = _normCI(payload?.cedula || '');
+    const name = (ci ? ci + '_' : '') + 'PCC_' + Utilities.formatDate(new Date(), TZ, 'yyyyMMdd_HHmmss') + '.pdf';
+    const folder = _getFolder_();
+    const file = folder.createFile(blobPdf).setName(name).setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+    const url = 'https://drive.google.com/file/d/' + file.getId() + '/view?usp=drivesdk';
+    return { id:file.getId(), url, name:file.getName(), html };
+  }
+
+  /***************  SUBMIT *****************/
+  function submitForm(payload){
+    if (!payload) throw new Error('Payload vacío');
+
+    const resolved = _resolvePermFromPayload_(payload);
+    payload.motivo_permiso_codigo = resolved.code;
+    payload.motivo_permiso_descripcion = resolved.desc;
+
+    const elig = checkPermitEligibility(payload);
+    if (!elig.ok) throw new Error(elig.message || 'No corresponde el permiso solicitado.');
+
+    const dDesde = _toDate_(payload.fecha_permiso_desde);
+    const dHasta = _toDate_(payload.fecha_permiso_hasta);
+    const totalDiasPermiso = (dDesde && dHasta) ? _calendarDaysInclusive_(dDesde, dHasta) : '';
+
+    const pdfRes = generarYGuardarPdf(payload);
+
+    const ss = _ss();
+    const sh = ss.getSheetByName(SHEET_REGISTRO) || ss.insertSheet(SHEET_REGISTRO);
+    _ensureRegistroHeaders_(sh);
+
+    const ciNorm = _normCI(payload.cedula);
+
+    const diaLibreFecha   = String(payload?.dia_libre_fecha || '').trim();
+    const diaLibreHorario = String(payload?.dia_libre_horario || '').trim();
+    let   horasAdicFechas = payload?.horas_adic_fechas;
+    if (Array.isArray(horasAdicFechas)) horasAdicFechas = horasAdicFechas.join(' | ');
+    horasAdicFechas = String(horasAdicFechas || '').trim();
+    const horasAdicTotal  = String(payload?.horas_adic_total || '').trim();
+
+    const registro = {
+      timestamp: _timestamp(),
+      expediente_codigo: String(payload.expediente_codigo || '').trim(),
+      cedula: ciNorm,
+      nombre_y_apellido_completo: String(payload.nombre_y_apellido_completo || payload.nombre_completo || '').trim(),
+      sexo: String(payload.sexo || '').trim(),
+      fecha_nacimiento: String(payload.fecha_nacimiento || '').trim(),
+      dependencia: String(payload.dependencia || '').trim(),
+      vinculacion: String(payload.vinculacion || '').trim(),
+      contacto: String(payload.contacto || '').trim(),
+      fecha_permiso_desde: payload.fecha_permiso_desde || '',
+      fecha_permiso_hasta: payload.fecha_permiso_hasta || '',
+      total_dias_permiso: totalDiasPermiso,
+      motivo_permiso_codigo: resolved.code != null ? resolved.code : '',
+      motivo_permiso_descripcion: resolved.desc || '',
+      observaciones: String(payload.observaciones || '').trim(),
+      docs_adjuntos_texto: String(payload.docs_adjuntos_texto || '').trim(),
+      evidencia_url: String(payload.evidencia_url || '').trim(),
+      pdf_url: pdfRes.url,
+      user_email: String(
+        payload.user_email ||
+        _fetchEmailByCI(ciNorm) ||
+        (Session.getActiveUser() && Session.getActiveUser().getEmail()) ||
+        ''
+      ),
+      dia_libre_fecha:   diaLibreFecha,
+      dia_libre_horario: diaLibreHorario,
+      horas_adic_fechas: horasAdicFechas,
+      horas_adic_total:  horasAdicTotal,
+      payload_json: JSON.stringify(payload || {})
+    };
+
+    const row = REG_HEADERS.map(h => registro[h] ?? '');
+    sh.appendRow(row);
+
+    const lastRow = sh.getLastRow();
+    const colE = REG_HEADERS.indexOf('evidencia_url') + 1;
+    const colP = REG_HEADERS.indexOf('pdf_url') + 1;
+    if (registro.evidencia_url) sh.getRange(lastRow, colE).setFormula(`=HYPERLINK("${registro.evidencia_url}","evidencia")`);
+    if (registro.pdf_url)       sh.getRange(lastRow, colP).setFormula(`=HYPERLINK("${registro.pdf_url}","pdf")`);
+
+    _invalidateCaches_();
+
+    return {
+      ok: true,
+      expediente: registro.expediente_codigo,
+      total_dias_permiso: totalDiasPermiso,
+      eligibility: elig,
+      pdf_url: pdfRes.url
+    };
+  }
+
+  /***************  UTILIDADES FRONT *****************/
+  function getPrintHtml(payload){
+    return _fillPrintHtml_(payload);
+  }
+
+  function getUserEmail(){
+    try { return Session.getActiveUser().getEmail() || ''; } catch(e){ return ''; }
+  }
+
+  function getMotivosLicencia() {
+    return PERMISOS;
+  }
+
+  function getHistorialLicencias() {
+    try {
+      const ss = _ss();
+      const sh = ss.getSheetByName(SHEET_REGISTRO);
+      if (!sh || sh.getLastRow() < 2) return [];
+      
+      const headers = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+      const dataRange = sh.getRange(2, 1, sh.getLastRow() - 1, sh.getLastColumn());
+      const data = dataRange.getValues();
+      
+      const result = [];
+      for (let i = 0; i < data.length; i++) {
+        const row = data[i];
+        const item = {};
+        for (let j = 0; j < headers.length; j++) {
+          item[headers[j]] = row[j];
+        }
+        item.id = i + 2; // Row number as ID
+        result.push(item);
+      }
+      
+      // Sort by timestamp descending
+      result.sort((a, b) => {
+        const dateA = new Date(a.timestamp || 0);
+        const dateB = new Date(b.timestamp || 0);
+        return dateB - dateA;
+      });
+      
+      return result;
+    } catch (e) {
+      console.error('Error al obtener historial:', e);
+      return [];
+    }
+  }
+
+  function generarReporte(tipo, periodo) {
+    try {
+      const ss = _ss();
+      const sh = ss.getSheetByName(SHEET_REGISTRO);
+      if (!sh || sh.getLastRow() < 2) return { ok: false, message: 'No hay datos para generar reporte' };
+      
+      const headers = sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0];
+      const dataRange = sh.getRange(2, 1, sh.getLastRow() - 1, sh.getLastColumn());
+      const data = dataRange.getValues();
+      
+      // Filter data based on period
+      const [year, month] = periodo.split('-');
+      const filteredData = data.filter(row => {
+        const fechaDesde = new Date(row[headers.indexOf('fecha_permiso_desde')]);
+        return fechaDesde.getFullYear() == year && (fechaDesde.getMonth() + 1) == month;
+      });
+      
+      // Create report content based on type
+      let reportContent = '';
+      
+      if (tipo === 'mensual') {
+        reportContent = createMonthlyReport(filteredData, headers, periodo);
+      } else if (tipo === 'anual') {
+        reportContent = createAnnualReport(filteredData, headers, year);
+      } else if (tipo === 'dependencia') {
+        reportContent = createDependencyReport(filteredData, headers);
+      } else if (tipo === 'motivo') {
+        reportContent = createReasonReport(filteredData, headers);
+      }
+      
+      // Create PDF
+      const blob = Utilities.newBlob(reportContent, 'text/html', 'report.html').getAs(MimeType.PDF);
+      const folder = _getFolder_();
+      const file = folder.createFile(blob).setName(`Reporte_${tipo}_${periodo}.pdf`);
+      const url = 'https://drive.google.com/file/d/' + file.getId() + '/view?usp=drivesdk';
+      
+      return { ok: true, url: url };
+    } catch (e) {
+      console.error('Error al generar reporte:', e);
+      return { ok: false, message: e.message };
+    }
+  }
+
+  function createMonthlyReport(data, headers, periodo) {
+    const [year, month] = periodo.split('-');
+    const monthName = new Date(year, month - 1).toLocaleDateString('es-ES', { month: 'long', year: 'numeric' });
+    
+    let html = `
+      <html>
+      <head>
+        <title>Reporte Mensual - ${monthName}</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1 { color: #1a73e8; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+          .summary { margin: 20px 0; padding: 15px; background-color: #f9f9f9; border-radius: 5px; }
+        </style>
+      </head>
+      <body>
+        <h1>Reporte Mensual de Licencias y Permisos</h1>
+        <div class="summary">
+          <p><strong>Período:</strong> ${monthName}</p>
+          <p><strong>Total de solicitudes:</strong> ${data.length}</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Expediente</th>
+              <th>Nombre</th>
+              <th>Dependencia</th>
+              <th>Motivo</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Días</th>
+            </tr>
+          </thead>
+          <tbody>
+    `;
+    
+    data.forEach(row => {
+      const nombre = row[headers.indexOf('nombre_y_apellido_completo')];
+      const dependencia = row[headers.indexOf('dependencia')];
+      const motivo = row[headers.indexOf('motivo_permiso_descripcion')];
+      const desde = new Date(row[headers.indexOf('fecha_permiso_desde')]);
+      const hasta = new Date(row[headers.indexOf('fecha_permiso_hasta')]);
+      const dias = row[headers.indexOf('total_dias_permiso')];
+      
+      html += `
+        <tr>
+          <td>${row[headers.indexOf('expediente_codigo')]}</td>
+          <td>${nombre}</td>
+          <td>${dependencia}</td>
+          <td>${motivo}</td>
+          <td>${desde.toLocaleDateString('es-ES')}</td>
+          <td>${hasta.toLocaleDateString('es-ES')}</td>
+          <td>${dias}</td>
+        </tr>
+      `;
+    });
+    
+    html += `
+          </tbody>
+        </table>
+      </body>
+      </html>
+    `;
+    
+    return html;
+  }
+
+  function createAnnualReport(data, headers, year) {
+    let html = `
+      <html>
+      <head>
+        <title>Reporte Anual - ${year}</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1 { color: #1a73e8; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+          .summary { margin: 20px 0; padding: 15px; background-color: #f9f9f9; border-radius: 5px; }
+        </style>
+      </head>
+      <body>
+        <h1>Reporte Anual de Licencias y Permisos</h1>
+        <div class="summary">
+          <p><strong>Año:</strong> ${year}</p>
+          <p><strong>Total de solicitudes:</strong> ${data.length}</p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Expediente</th>
+              <th>Nombre</th>
+              <th>Dependencia</th>
+              <th>Motivo</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Días</th>
+            </tr>
+          </thead>
+          <tbody>
+    `;
+    
+    data.forEach(row => {
+      const nombre = row[headers.indexOf('nombre_y_apellido_completo')];
+      const dependencia = row[headers.indexOf('dependencia')];
+      const motivo = row[headers.indexOf('motivo_permiso_descripcion')];
+      const desde = new Date(row[headers.indexOf('fecha_permiso_desde')]);
+      const hasta = new Date(row[headers.indexOf('fecha_permiso_hasta')]);
+      const dias = row[headers.indexOf('total_dias_permiso')];
+      
+      html += `
+        <tr>
+          <td>${row[headers.indexOf('expediente_codigo')]}</td>
+          <td>${nombre}</td>
+          <td>${dependencia}</td>
+          <td>${motivo}</td>
+          <td>${desde.toLocaleDateString('es-ES')}</td>
+          <td>${hasta.toLocaleDateString('es-ES')}</td>
+          <td>${dias}</td>
+        </tr>
+      `;
+    });
+    
+    html += `
+          </tbody>
+        </table>
+      </body>
+      </html>
+    `;
+    
+    return html;
+  }
+
+  function createDependencyReport(data, headers) {
+    // Group by dependency
+    const dependencies = {};
+    data.forEach(row => {
+      const dep = row[headers.indexOf('dependencia')];
+      if (!dependencies[dep]) {
+        dependencies[dep] = [];
+      }
+      dependencies[dep].push(row);
+    });
+    
+    let html = `
+      <html>
+      <head>
+        <title>Reporte por Dependencia</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1 { color: #1a73e8; }
+          h2 { color: #34a853; margin-top: 30px; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+          .summary { margin: 20px 0; padding: 15px; background-color: #f9f9f9; border-radius: 5px; }
+        </style>
+      </head>
+      <body>
+        <h1>Reporte de Licencias y Permisos por Dependencia</h1>
+        <div class="summary">
+          <p><strong>Total de dependencias:</strong> ${Object.keys(dependencies).length}</p>
+          <p><strong>Total de solicitudes:</strong> ${data.length}</p>
+        </div>
+    `;
+    
+    Object.keys(dependencies).sort().forEach(dep => {
+      html += `
+        <h2>${dep}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Expediente</th>
+              <th>Nombre</th>
+              <th>Motivo</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Días</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      dependencies[dep].forEach(row => {
+        const nombre = row[headers.indexOf('nombre_y_apellido_completo')];
+        const motivo = row[headers.indexOf('motivo_permiso_descripcion')];
+        const desde = new Date(row[headers.indexOf('fecha_permiso_desde')]);
+        const hasta = new Date(row[headers.indexOf('fecha_permiso_hasta')]);
+        const dias = row[headers.indexOf('total_dias_permiso')];
+        
+        html += `
+          <tr>
+            <td>${row[headers.indexOf('expediente_codigo')]}</td>
+            <td>${nombre}</td>
+            <td>${motivo}</td>
+            <td>${desde.toLocaleDateString('es-ES')}</td>
+            <td>${hasta.toLocaleDateString('es-ES')}</td>
+            <td>${dias}</td>
+          </tr>
+        `;
+      });
+      
+      html += `
+          </tbody>
+        </table>
+      `;
+    });
+    
+    html += `
+      </body>
+      </html>
+    `;
+    
+    return html;
+  }
+
+  function createReasonReport(data, headers) {
+    // Group by reason
+    const reasons = {};
+    data.forEach(row => {
+      const reason = row[headers.indexOf('motivo_permiso_descripcion')];
+      if (!reasons[reason]) {
+        reasons[reason] = [];
+      }
+      reasons[reason].push(row);
+    });
+    
+    let html = `
+      <html>
+      <head>
+        <title>Reporte por Motivo</title>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; }
+          h1 { color: #1a73e8; }
+          h2 { color: #34a853; margin-top: 30px; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+          th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+          th { background-color: #f2f2f2; }
+          .summary { margin: 20px 0; padding: 15px; background-color: #f9f9f9; border-radius: 5px; }
+        </style>
+      </head>
+      <body>
+        <h1>Reporte de Licencias y Permisos por Motivo</h1>
+        <div class="summary">
+          <p><strong>Total de motivos:</strong> ${Object.keys(reasons).length}</p>
+          <p><strong>Total de solicitudes:</strong> ${data.length}</p>
+        </div>
+    `;
+    
+    Object.keys(reasons).sort().forEach(reason => {
+      html += `
+        <h2>${reason}</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Expediente</th>
+              <th>Nombre</th>
+              <th>Dependencia</th>
+              <th>Desde</th>
+              <th>Hasta</th>
+              <th>Días</th>
+            </tr>
+          </thead>
+          <tbody>
+      `;
+      
+      reasons[reason].forEach(row => {
+        const nombre = row[headers.indexOf('nombre_y_apellido_completo')];
+        const dependencia = row[headers.indexOf('dependencia')];
+        const desde = new Date(row[headers.indexOf('fecha_permiso_desde')]);
+        const hasta = new Date(row[headers.indexOf('fecha_permiso_hasta')]);
+        const dias = row[headers.indexOf('total_dias_permiso')];
+        
+        html += `
+          <tr>
+            <td>${row[headers.indexOf('expediente_codigo')]}</td>
+            <td>${nombre}</td>
+            <td>${dependencia}</td>
+            <td>${desde.toLocaleDateString('es-ES')}</td>
+            <td>${hasta.toLocaleDateString('es-ES')}</td>
+            <td>${dias}</td>
+          </tr>
+        `;
+      });
+      
+      html += `
+          </tbody>
+        </table>
+      `;
+    });
+    
+    html += `
+      </body>
+      </html>
+    `;
+    
+    return html;
+  }
+
+  function _readDependencias_() {
+    try {
+      const ss = _ss();
+      const sh = ss.getSheetByName(SHEET_DEPENDENCIAS);
+      if (sh && sh.getLastRow() > 0) {
+        const vals = sh.getRange(1, 1, sh.getLastRow(), 1).getValues()
+          .flat()
+          .map(v => String(v || '').trim())
+          .filter(Boolean);
+        if (vals.length) {
+          const set = {};
+          vals.forEach(v => set[v] = true);
+          return Object.keys(set).sort();
+        }
+      }
+      const out = [];
+      Object.keys(DEFAULT_DEP_TREE).forEach(parent => {
+        const children = DEFAULT_DEP_TREE[parent];
+        if (!children || !children.length) out.push(parent);
+        else children.forEach(child => out.push(`${parent} / ${child}`));
+      });
+      return out.sort();
+    } catch (e) {
+      return Object.keys(DEFAULT_DEP_TREE);
+    }
+  }
+</script>
