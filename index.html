@@ -1,234 +1,29 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <title>Permisos y Licencias – INGAVI (Embebido)</title>
-  <meta name="description" content="Formulario embebido de permisos y licencias del Hospital Ingavi – Registro unificado con validaciones y PDF automático."/>
-  <meta name="robots" content="index,follow"/>
-  <meta property="og:title" content="Permisos y Licencias – INGAVI (Embebido)"/>
-  <meta property="og:description" content="Formulario embebido de permisos y licencias del Hospital Ingavi – Registro unificado con validaciones y PDF automático."/>
-  <meta property="og:type" content="website"/>
-  <meta name="color-scheme" content="light"/>
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Permisos INGAVI — Formulario</title>
   <style>
-    :root{
-      --bg: #f7f8fb;
-      --surface: #ffffff;
-      --surface-2: #fbfcff;
-      --text: #0f172a;
-      --muted: #475569;
-      --border: #e2e8f0;
-      --primary: #2563eb;
-      --primary-600: #1d4ed8;
-      --ring: #93c5fd;
-      --shadow: 0 10px 24px rgba(2, 6, 23, .06);
-      --radius: 14px;
-      --maxw: 1200px;
-    }
-    *,*::before,*::after{ box-sizing: border-box; }
-    html,body{ margin:0; padding:0; height:100%; background:var(--bg); color:var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif; }
-
-    /* AppBar (sticky) */
-    .appbar{
-      position: sticky; top: 0; z-index: 50;
-      background: linear-gradient(180deg,#ffffffdd 0%,#ffffffcc 100%);
-      backdrop-filter: saturate(180%) blur(6px);
-      border-bottom:1px solid var(--border);
-    }
-    .appbar-inner{
-      max-width: var(--maxw); margin:0 auto; padding: 16px 20px;
-      display:flex; align-items:center; justify-content:space-between; gap:16px;
-    }
-    .brand{ display:flex; align-items:center; gap:12px; }
-    .brand-badge{ width:40px; height:40px; border-radius:10px; background:linear-gradient(135deg,#60a5fa,#7c3aed); box-shadow:var(--shadow); }
-    .brand h1{ margin:0; font-size:1.15rem; line-height:1.1; }
-    .brand small{ color:var(--muted); }
-
-    /* Buttons */
-    .btn{ display:inline-flex; align-items:center; gap:8px; padding:10px 14px; border-radius:12px; border:1px solid transparent; cursor:pointer; font-weight:600; transition:all .15s ease; background:var(--surface); color:var(--primary); border-color:var(--primary);}
-    .btn:hover{ background:#eff6ff; transform: translateY(-1px); }
-    .btn-primary{ background:var(--primary); color:#fff; border-color:var(--primary); }
-    .btn-primary:hover{ background:var(--primary-600); }
-    .btn-ghost{ background:transparent; color:var(--muted); border-color:var(--border); }
-    .btn-ghost:hover{ background:#f8fafc; color:var(--text); }
-
-    /* Container */
-    .container{ max-width: var(--maxw); margin: 0 auto; padding: 18px 20px; }
-
-    /* Card */
-    .card{
-      background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .card-head{
-      padding:14px 16px; border-bottom:1px solid var(--border); background:var(--surface-2);
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-    }
-    .card-head .title{ font-weight:800; font-size:1rem; }
-    .card-body{ padding: 0; }
-
-    /* Controls line */
-    .controls{ display:flex; flex-wrap:wrap; align-items:center; gap:8px; }
-
-    /* Iframe wrapper */
-    .frame-wrap{
-      position:relative; width:100%;
-      /* altura flexible: 100vh menos cabecera/espacios */
-      min-height: calc(100vh - 190px);
-      background: #fff;
-    }
-    iframe.embed{
-      width:100%; height:100%; border:0; display:block; background:#fff;
-    }
-
-    /* Footer note */
-    .footnote{ color:var(--muted); font-size:.95rem; padding: 10px 16px; border-top:1px solid var(--border); background:#fafcff; }
-
-    /* Small helpers */
-    .spacer{ flex:1; }
-    .field{
-      display:flex; align-items:center; gap:8px; padding:6px 8px; border:1px solid var(--border); border-radius:10px; background:#fff;
-    }
-    .field input{
-      width: 140px; border:0; outline:none; font-weight:600;
-    }
-    .muted{ color:var(--muted); }
-    @media (max-width:640px){
-      .field{ width:100%; }
-      .field input{ width:100%; }
+    html, body { height: 100%; margin: 0; }
+    .wrap { height: 100%; }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
     }
   </style>
 </head>
 <body>
-
-  <!-- Header -->
-  <header class="appbar">
-    <div class="appbar-inner">
-      <div class="brand">
-        <div class="brand-badge" aria-hidden="true"></div>
-        <div>
-          <h1>Permisos y Licencias – INGAVI</h1>
-          <small class="muted">Formulario embebido (GitHub Pages)</small>
-        </div>
-      </div>
-
-  <script>
-    /**************************************************************
-     * CONFIGURA AQUÍ LA URL DE TU WEB APP GOOGLE APPS SCRIPT
-     * Debe ser la URL pública de despliegue (termina en /exec)
-     **************************************************************/
-    const GAS_BASE_URL = "https://script.google.com/macros/s/AKfycbxi80RiYKDstq3VCE0HqqijwJxAk-Iw0kmOSFWTtiG6372MgoEiQWS38DV8IEWa3bgXyw/exec"; // <-- REEMPLAZA ESTO
-
-    // Lee parámetros del query string (útil si publicas con ?expediente=&cedula= en GitHub Pages)
-    function getQueryParam(name){
-      const url = new URL(window.location.href);
-      return url.searchParams.get(name);
-    }
-
-    // Construye la URL del iframe agregando parámetros si existen
-    function buildIframeUrl(){
-      const expediente = (document.getElementById('expedienteParam').value || '').trim();
-      const cedula = (document.getElementById('cedulaParam').value || '').trim();
-
-      if (!GAS_BASE_URL){
-        return "";
-      }
-
-      const url = new URL(GAS_BASE_URL);
-      // Pasamos parámetros opcionales que tu GAS puede leer con e.parameter.*
-      if (expediente) url.searchParams.set('expediente', expediente);
-      if (cedula)     url.searchParams.set('cedula', cedula);
-
-      // Puedes pasar otros parámetros como 'embed=1' para ajustar estilos del lado GAS
-      url.searchParams.set('embed', '1');
-
-      return url.toString();
-    }
-
-    // Inicializa campos con lo que venga del query de GitHub Pages
-    function initParamsFromLocation(){
-      const expQ = getQueryParam('expediente');
-      const ciQ  = getQueryParam('cedula');
-      if (expQ) document.getElementById('expedienteParam').value = expQ;
-      if (ciQ)  document.getElementById('cedulaParam').value     = ciQ;
-    }
-
-    // Carga el iframe y el enlace directo
-    function loadIframe(){
-      const frame = document.getElementById('formFrame');
-      const link  = document.getElementById('directLink');
-      const url = buildIframeUrl();
-      frame.src = url || 'about:blank';
-      link.href = url || '#';
-    }
-
-    // Botón "Abrir en pestaña nueva"
-    function openStandalone(){
-      const url = buildIframeUrl();
-      if (url) window.open(url, '_blank', 'noopener');
-      else alert('Configura primero la URL del Web App (GAS_BASE_URL).');
-    }
-
-    // Botón "Aplicar parámetros"
-    function applyParams(){
-      loadIframe();
-    }
-
-    // Botón "Recargar"
-    function reloadFrame(){
-      const frame = document.getElementById('formFrame');
-      if (frame && frame.src) frame.contentWindow.location.reload();
-    }
-
-    // Pantalla completa
-    function toggleFull(){
-      const wrap = document.querySelector('.frame-wrap');
-      if (!document.fullscreenElement){
-        if (wrap.requestFullscreen) wrap.requestFullscreen();
-      } else {
-        if (document.exitFullscreen) document.exitFullscreen();
-      }
-    }
-
-    // Zoom (CSS scale del iframe)
-    let zoom = 1.0;
-    function applyZoom(){
-      const frame = document.getElementById('formFrame');
-      const label = document.getElementById('zoomLabel');
-      // Usamos transform dentro de un contenedor para evitar blur: aplicamos al frame
-      frame.style.transformOrigin = 'top left';
-      frame.style.transform = `scale(${zoom})`;
-      // Ajustamos el alto del contenedor para que no aparezcan barras dobles
-      const wrap = document.querySelector('.frame-wrap');
-      wrap.style.height = `calc(100vh - 190px)`;
-      label.textContent = Math.round(zoom*100) + '%';
-    }
-    function zoomIn(){ zoom = Math.min(1.5, zoom + 0.1); applyZoom(); }
-    function zoomOut(){ zoom = Math.max(0.7, zoom - 0.1); applyZoom(); }
-
-    // Auto-ajuste de altura (fallback simple): estira el contenedor al viewport
-    function keepHeight(){
-      const wrap = document.querySelector('.frame-wrap');
-      const h = Math.max(480, window.innerHeight - 190);
-      wrap.style.minHeight = h + 'px';
-    }
-    window.addEventListener('resize', keepHeight);
-
-    // Init
-    document.addEventListener('DOMContentLoaded', ()=>{
-      initParamsFromLocation();
-      keepHeight();
-      loadIframe();
-
-      document.getElementById('btnOpenStandalone').addEventListener('click', openStandalone);
-      document.getElementById('btnApplyParams').addEventListener('click', applyParams);
-      document.getElementById('btnReload').addEventListener('click', reloadFrame);
-      document.getElementById('btnFull').addEventListener('click', toggleFull);
-      document.getElementById('btnZoomIn').addEventListener('click', zoomIn);
-      document.getElementById('btnZoomOut').addEventListener('click', zoomOut);
-      applyZoom();
-    });
-  </script>
+  <div class="wrap">
+    <!-- Reemplazar la URL con la de tu despliegue de Apps Script (Web App) -->
+    <iframe
+      src="https://script.google.com/macros/s/AKfycbxi80RiYKDstq3VCE0HqqijwJxAk-Iw0kmOSFWTtiG6372MgoEiQWS38DV8IEWa3bgXyw/exec"
+      title="Sistema de Licencias y Permisos - INGAVI"
+      loading="eager"
+      referrerpolicy="no-referrer">
+    </iframe>
+  </div>
 </body>
 </html>
